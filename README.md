@@ -1,4 +1,25 @@
 # api-breaker-auto
+The APISIX dynamic fuse plugin implemented by Google SRE algorithm.
+
+## steps
+1. Download the plugin code and put it in the apisix/plugins directory
+2. Configure conf/config-default.yaml
+
+## parameters
+- policy: currently only redis;
+- Redis related configuration: redis_host, redis_port, redis_database;
+- break_response_code: The definition of the HTTP status code returned to the client after the circuit breaker is triggered, the default is 502;
+- window: Statistics of the data window on which the fusing algorithm is based, the default is 60s;
+- k: The multiplier for triggering the fuse, the smaller the more aggressive, the larger the more conservative, the default is 2;
+- unhealthy.http_statuses: upstream service exception status code definition, default {500};
+
+## Google SRE
+[Handling Overload](https://sre.google/sre-book/handling-overload/)
+
+## Window data statistics
+Redis Sorted Set
+
+***
 借鉴 Google SRE 算法实现的 APISIX 动态熔断插件。
 
 ## 步骤
